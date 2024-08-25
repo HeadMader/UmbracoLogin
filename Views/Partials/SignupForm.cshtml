@@ -1,0 +1,65 @@
+﻿@using UmbracoLogin.Controllers
+@model UmbracoLogin.Models.SignupFormModel
+
+@{
+    var countryList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "USA" },
+        new SelectListItem { Value = "2", Text = "Canada" },
+        new SelectListItem { Value = "3", Text = "UK" },
+        // Add more countries as needed
+    };
+}
+
+@using (Html.BeginUmbracoForm<AuthController>(nameof(AuthController.HandleSignUp)))
+{
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Sign Up</h2>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, htmlAttributes: new { @class = "form-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Mobile, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountryID, htmlAttributes: new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.CountryID, countryList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CountryID, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.HiddenFor(m => m.aID)
+                @Html.HiddenFor(m => m.SignupIP)
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

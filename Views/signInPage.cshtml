@@ -1,0 +1,30 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using UmbracoLogin.Controllers
+@using UmbracoLogin.Models
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "MasterView.cshtml";
+}
+
+@{
+	if (TempData["Message"] == null || TempData["Success"] == null || (TempData["Success"] != null && !(bool)TempData["Success"]))
+		Html.RenderPartial("~/Views/Partials/SigninForm.cshtml", new SignInFormModel());
+}
+
+<div class="container mt-3">
+	<div id="message" class="mt-5 row justify-content-center">
+		<div class="col-md-6">
+			@if (TempData["Message"] != null)
+			{
+				<div class="alert overflow-auto @(TempData["Success"] != null && (bool)TempData["Success"] ? "alert-success" : "alert-danger")">
+					<pre>@TempData["Message"]</pre>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+@section Scripts {	
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+}
